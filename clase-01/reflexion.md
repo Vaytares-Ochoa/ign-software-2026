@@ -6,7 +6,7 @@ En primer lugar, se utilizaron prompts simples o "pobres", los cuales generaron 
 
 Posteriormente, se emplearon prompts más descriptivos y específicos, lo que permitió obtener resultados más completos. En estos casos, Copilot generó no solo la función de validación, sino también comentarios más claros, explicaciones sobre el uso de expresiones regulares y ejemplos de prueba que facilitan la comprensión del funcionamiento del código. Esto evidencia que Copilot interpreta mejor las instrucciones cuando estas están bien definidas.
 
-Además, se compararon distintas expresiones regulares. Algunas más simples validaban únicamente la estructura básica (texto@texto.texto), mientras que otras más avanzadas incluían restricciones adicionales como el uso de caracteres válidos, dominios correctos y longitudes mínimas. Esto demuestra que el nivel de precisión del código también puede mejorarse dependiendo del enfoque del desarrollador.
+Además, se compararon distintas expresiones regulares. Algunas más simples validaban únicamente la estructura básica (texto @texto.texto), mientras que otras más avanzadas incluían restricciones adicionales como el uso de caracteres válidos, dominios correctos y longitudes mínimas. Esto demuestra que el nivel de precisión del código también puede mejorarse dependiendo del enfoque del desarrollador.
 
 El proceso de análisis consistió en:
 - Probar diferentes tipos de prompts (simples vs detallados).

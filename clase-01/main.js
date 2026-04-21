@@ -1,10 +1,11 @@
 
+// 1. Verifica si un correo electrónico tiene un formato válido
+// 2. Función que valida direcciones email usando expresiones regulares
+// 3. Comprueba que el email ingresado cumple con la estructura básica
+// 4. Evalúa si una cadena es un correo electrónico válido
+// 5. Retorna true si el email es correcto, false si no lo es
 
-// Comment 1: This is an informative comment about the email validation algorithm.
-// Comment 2: Edge case handling for invalid emails should include common typos.
-// Comment 3: Adding test cases for different email formats.
-// Comment 4: Consider user experience when prompting for email input.
-// Comment 5: Improve efficiency with regex validation instead of manual checks.
+
 
 // Function to validate email
 function validateEmail(email) {

@@ -1,4 +1,4 @@
-| ID | Título Corto | Como / Quiero / Para qué | Criterios de Aceptación (Resumido) | Prioridad |
+| ID | HISTORIAS DE USUARIO | Como / Quiero / Para qué | Criterios de Aceptación (Resumido) | Prioridad |
 |----|--------------|--------------------------|------------------------------------|-----------|
 | 1 | Búsqueda de Disponibilidad de Libros | EST: Buscar libro por título, autor o ISBN / Verificar disponibilidad sin ir a físico | - Búsqueda por 4 campos (título, autor, ISBN, materia) <br> - Actualización cada 60s <br> - Mostrar "X de Y copias" <br> - Ubicación en estantería (sección, nivel) <br> - Tolerancia a typos con sugerencias | ALTA |
 | 3 | Registrar Préstamo con Código de Barras | BIBL: Escanear código de barras / Registrar automáticamente sin escribir | - Lectura código libro < 2s <br> - Lectura carné estudiante < 2s <br> - Validar estudiante activo en SIAA <br> - Rechazar si tiene multas pendientes <br> - Vencimiento = actual + 14 días <br> - Recibo impreso automático <br> - Máximo 5 libros simultáneos | ALTA |

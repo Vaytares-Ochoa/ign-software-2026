@@ -1,4 +1,4 @@
-// Existing content of main.js goes here
+
 
 // Comment 1: This is an informative comment about the email validation algorithm.
 // Comment 2: Edge case handling for invalid emails should include common typos.

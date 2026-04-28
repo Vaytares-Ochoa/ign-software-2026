@@ -1,145 +1,155 @@
+#  VIOLACIONES SOLID (FORMATO QUE TE PIDEN)
+
+---
+
 # 1. Violación del **SRP (Single Responsibility Principle)**
 
 > *Una clase debe tener una sola responsabilidad.*
 
-***
+---
 
 ## Código que genera la violación
 
-```ts
-class SistemaUniversitario {
-    private estudiantes: any[] = [];
-    private profesores: any[] = [];
-    private cursos: any[] = [];
-    private pagos: any[] = [];
+```js
+createOrder(order) {
 
-    registrarEstudiante(...) { ... }
-    eliminarEstudiante(...) { ... }
+    if (!order.user || !order.total) {
+        throw new Error("Orden inválida");
+    }
 
-    registrarProfesor(...) { ... }
+    this.orders.push(order);
 
-    crearCurso(...) { ... }
-    matricularEstudiante(...) { ... }
+    if (order.paymentType === "paypal") {
+        console.log("Pagando con PayPal");
+    }
 
-    procesarPago(...) { ... }
-
-    generarReporteFinanciero() { ... }
-    generarReporteEstudiantes() { ... }
-    generarReporteCursos() { ... }
-
-    enviarCorreos() { ... }
-
-    respaldarSistema() { ... }
-    restaurarSistema(...) { ... }
-
-    apagarSistema() { ... }
+    console.log("Enviando email");
 }
 ```
 
-***
+---
 
-##  Por qué se produce la violación
+## Por qué se produce la violación
 
-La clase **`SistemaUniversitario`** realiza **demasiadas tareas distintas**:
+La clase **`OrderService`** realiza múltiples responsabilidades:
 
-*   Maneja **estudiantes**
-*   Maneja **profesores**
-*   Maneja **cursos**
-*   Maneja **pagos**
-*   Genera **reportes**
-*   Envía **correos**
-*   Realiza **respaldo y restauración**
-*   Controla el **ciclo de vida del sistema**
+* Validación de datos
+* Almacenamiento de órdenes
+* Procesamiento de pagos
+* Envío de notificaciones
 
-Cada una de estas tareas es una razón distinta para cambiar la clase.
+Cada una de estas acciones debería estar en clases separadas.
 
-#  2. Violación del **OCP (Open/Closed Principle)**
+---
 
+# 2. Violación del **OCP (Open/Closed Principle)**
 
 > *El código debe estar abierto a extensión, pero cerrado a modificación.*
 
-***
+---
 
-##  Código que genera la violación
+## Código que genera la violación
 
-### Ejemplo 1: método `procesarPago`
-
-```ts
-procesarPago(estudianteId: number, monto: number, metodo: string) {
-    if (monto <= 0) {
-        console.log("Monto inválido");
-        return;
-    }
-
-    if (metodo !== "tarjeta" && metodo !== "efectivo") {
-        console.log("Método no válido");
-        return;
-    }
-
-    this.pagos.push({
-        estudianteId,
-        monto,
-        metodo,
-        fecha: new Date()
-    });
+```js
+if (order.paymentType === "paypal") {
+    console.log("Pagando con PayPal");
+} else if (order.paymentType === "card") {
+    console.log("Pagando con tarjeta");
 }
 ```
 
-***
+---
 
-##  Por qué se produce la violación
+## Por qué se produce la violación
 
-El comportamiento del sistema depende de **condicionales (`if`)**.
+El sistema depende de **condicionales (`if`)**.
 
-Si mañana se quiere:
+Si se desea agregar nuevos métodos de pago como:
 
-*   agregar **PayPal**
-*   agregar **transferencia**
-*   agregar **pago móvil**
+* Transferencia
+* Criptomonedas
+* Pago móvil
 
-**Hay que modificar el método existente**, rompiendo OCP.
+Se debe modificar el código existente, rompiendo el principio OCP.
 
-***
+---
 
-#  3. Violación del **DIP (Dependency Inversion Principle)**
+# 3. Violación del **DIP (Dependency Inversion Principle)**
 
+> *Los módulos de alto nivel deben depender de abstracciones.*
 
-> *Los módulos de alto nivel deben depender de abstracciones, no de detalles.*
+---
 
-***
+## Código que genera la violación
 
-##  Código que genera la violación
+```js
+this.orders = [];
 
-```ts
-private estudiantes: any[] = [];
-private pagos: any[] = [];
+this.orders.push(order);
 ```
 
-Y dentro de métodos:
+---
 
-```ts
-this.pagos.push({
-    estudianteId: estudianteId,
-    monto: monto,
-    metodo: metodo,
-    fecha: new Date()
-});
+## Por qué se produce la violación
+
+La clase depende directamente de:
+
+* Un array concreto (`[]`)
+* No usa abstracciones
+* No hay repositorios ni interfaces
+
+Esto hace difícil cambiar la forma de almacenamiento (por ejemplo, base de datos).
+
+---
+
+# 4. Violación del **ISP (Interface Segregation Principle)**
+
+> *Los clientes no deben depender de métodos que no usan.*
+
+---
+
+## Código que genera la violación
+
+```js
+class OrderService {
+    createOrder(order) { ... }
+}
 ```
 
-***
+---
 
-##  Por qué se produce la violación
+## Por qué se produce la violación
 
-La clase:
+No hay separación de responsabilidades en interfaces.
 
-*   Depende directamente de **arrays concretos**
-*   Usa **`any`** (sin abstracciones)
-*   Maneja directamente **estructura y almacenamiento de datos**
-*   No utiliza:
-    *   Interfaces
-    *   Inyección de dependencias
-    *   Repositorios
-    *   Servicios abstractos
+El servicio obliga a manejar:
 
-***
+* Validación
+* Pagos
+* Persistencia
 
+Todo en un solo punto.
+
+---
+
+# 5. Violación del **LSP (Liskov Substitution Principle)**
+
+> *Las clases derivadas deben poder sustituir a sus clases base.*
+
+---
+
+## Código que genera la violación
+
+```js
+if (order.paymentType === "paypal") {
+    console.log("Pagando con PayPal");
+}
+```
+
+---
+
+## Por qué se produce la violación
+
+No existe una jerarquía de clases para pagos.
+
+No se pueden sustituir comportamientos fácilmente porque todo está basado en condicionales.

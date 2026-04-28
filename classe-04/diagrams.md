@@ -26,72 +26,44 @@ El Sistema de E-commerce es una plataforma digital que facilita la compra y vent
 
 ## Diagrama PlantUML
 
-```plantuml
-@startuml
-!define RECTANGLE_BG #E1F5FF
-!define PROCESS_BG #FFF9C4
-!define STORAGE_BG #F3E5F5
-!define EXTERNAL_BG #E8F5E9
-
-skinparam backgroundColor #FFFFFF
-skinparam rectangle {
-  BackgroundColor RECTANGLE_BG
-  BorderColor #0288D1
-  FontColor #01579B
-}
-
-package "Cliente" {
-  rectangle "Interfaz Web/App" as UI #E1F5FF
-}
-
-package "Plataforma E-commerce" {
-  rectangle "Sistema de Usuarios" as USERS #PROCESS_BG
-  rectangle "Catálogo de Productos" as CATALOG #PROCESS_BG
-  rectangle "Carrito de Compras" as CART #PROCESS_BG
-  rectangle "Gestión de Pedidos" as ORDERS #PROCESS_BG
-  rectangle "Sistema de Notificaciones" as NOTIF #PROCESS_BG
-}
-
-package "Almacenamiento" {
-  rectangle "Base de Datos\n(Usuarios, Productos,\nPedidos)" as DB #F3E5F5
-  rectangle "Caché\n(Catálogo, Sesiones)" as CACHE #F3E5F5
-}
-
-package "Servicios Externos" {
-  rectangle "Pasarela de Pago" as PAYMENT #E8F5E9
-  rectangle "Servicio de Envíos" as SHIPPING #E8F5E9
-  rectangle "Servicio de Email/SMS" as EMAIL #E8F5E9
-}
-
-package "Sistema Interno" {
-  rectangle "Inventario" as INVENTORY #PROCESS_BG
-  rectangle "Reseñas y\nCalificaciones" as REVIEWS #PROCESS_BG
-}
-
-' Conexiones desde UI
-UI --> USERS : Login/Registro
-UI --> CATALOG : Buscar/Navegar
-UI --> CART : Agregar/Ver Carrito
-UI --> ORDERS : Ver Pedidos
-UI --> REVIEWS : Calificar/Reseñar
-
-' Conexiones internas
-USERS --> DB : Guardar/Recuperar
-CATALOG --> DB : Consultar Productos
-CATALOG --> CACHE : Caché de Datos
-CART --> INVENTORY : Verificar Disponibilidad
-CART --> DB : Guardar Carrito
-ORDERS --> DB : Guardar/Actualizar
-ORDERS --> NOTIF : Notificar Estado
-INVENTORY --> DB : Actualizar Stock
-REVIEWS --> DB : Guardar Reseñas
-
-' Conexiones con Servicios Externos
-CART --> PAYMENT : Procesar Pago
-PAYMENT --> ORDERS : Confirmar Transacción
-ORDERS --> SHIPPING : Crear Envío
-SHIPPING --> NOTIF : Estado de Envío
-NOTIF --> EMAIL : Enviar Notificaciones
-
-@enduml
+``graph TB
+    UI["Interfaz Web/App"]
+    
+    USERS["Sistema de Usuarios"]
+    CATALOG["Catálogo de Productos"]
+    CART["Carrito de Compras"]
+    ORDERS["Gestión de Pedidos"]
+    NOTIF["Sistema de Notificaciones"]
+    
+    DB["Base de Datos"]
+    CACHE["Caché"]
+    
+    PAYMENT["Pasarela de Pago"]
+    SHIPPING["Servicio de Envíos"]
+    EMAIL["Servicio de Email/SMS"]
+    
+    INVENTORY["Inventario"]
+    REVIEWS["Reseñas y Calificaciones"]
+    
+    UI --> USERS
+    UI --> CATALOG
+    UI --> CART
+    UI --> ORDERS
+    UI --> REVIEWS
+    
+    USERS --> DB
+    CATALOG --> DB
+    CATALOG --> CACHE
+    CART --> INVENTORY
+    CART --> DB
+    ORDERS --> DB
+    ORDERS --> NOTIF
+    INVENTORY --> DB
+    REVIEWS --> DB
+    
+    CART --> PAYMENT
+    PAYMENT --> ORDERS
+    ORDERS --> SHIPPING
+    SHIPPING --> NOTIF
+    NOTIF --> EMAIL
 ```

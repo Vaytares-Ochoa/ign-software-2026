@@ -4,23 +4,24 @@ class OrderService {
     }
 
     createOrder(order) {
+
         // Validación
         if (!order.user || !order.total) {
             throw new Error("Orden inválida");
         }
 
-        // Guardar en "DB"
+        // Guardar
         this.orders.push(order);
 
-        // Procesar pago
+        // Pago
         if (order.paymentType === "paypal") {
-            console.log("Procesando pago con PayPal");
-        } else if (order.paymentType === "credit") {
-            console.log("Procesando pago con tarjeta");
+            console.log("Pagando con PayPal");
+        } else if (order.paymentType === "card") {
+            console.log("Pagando con tarjeta");
         }
 
-        // Enviar email
-        console.log("Enviando email al usuario");
+        // Email
+        console.log("Enviando email");
 
         return order;
     }

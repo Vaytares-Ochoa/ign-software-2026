@@ -26,7 +26,8 @@ El Sistema de E-commerce es una plataforma digital que facilita la compra y vent
 
 ## Diagrama PlantUML
 
-``graph TB
+```
+graph TB
     UI["Interfaz Web/App"]
     
     USERS["Sistema de Usuarios"]

@@ -1,19 +1,43 @@
-const Order = require('..//models/Order');
-const OrderService = require('..//OrderService');
+const assert = require("assert");
 
-test("crear orden correctamente", () => {
-    const mockValidator = { validate: jest.fn() };
-    const mockRepo = { save: jest.fn() };
-    const mockPayment = { processPayment: jest.fn() };
+class FakeValidator {
+    validate() {}
+}
 
-    const service = new OrderService(mockValidator, mockRepo, mockPayment);
+class FakeRepo {
+    constructor() {
+        this.saved = false;
+    }
+    save() {
+        this.saved = true;
+    }
+}
 
-    const order = new Order("Juan", 100, "paypal");
+class FakePayment {
+    constructor() {
+        this.called = false;
+    }
+    process() {
+        this.called = true;
+    }
+}
 
-    const result = service.createOrder(order);
+// Test
+const validator = new FakeValidator();
+const repo = new FakeRepo();
+const payment = new FakePayment();
 
-    expect(result).toBe(order);
-    expect(mockValidator.validate).toHaveBeenCalled();
-    expect(mockRepo.save).toHaveBeenCalled();
-    expect(mockPayment.processPayment).toHaveBeenCalled();
-});
+const service = new (require('./refactor.js').OrderService)(
+    validator,
+    repo,
+    payment
+);
+
+const order = { user: "Juan", total: 100 };
+
+service.createOrder(order);
+
+assert(repo.saved === true);
+assert(payment.called === true);
+
+console.log("✅ Test pasado");

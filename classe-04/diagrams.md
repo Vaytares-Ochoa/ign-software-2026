@@ -26,7 +26,6 @@ El Sistema de E-commerce es una plataforma digital que facilita la compra y vent
 
 ## Diagrama PlantUML
 
-```
 graph TB
     UI["Interfaz Web/App"]
     
@@ -66,5 +65,6 @@ graph TB
     PAYMENT --> ORDERS
     ORDERS --> SHIPPING
     SHIPPING --> NOTIF
+    NOTIF --> EMAIL
     NOTIF --> EMAIL
 ```

@@ -1,76 +1,23 @@
-# 🛒 Sistema de E‑commerce
+# 📦 Diagrama de Estados del Pedido
 
-Este proyecto representa un **Sistema de E‑commerce** modelado mediante diagramas UML utilizando **Mermaid**, los cuales semaidEste proyecto representa un **Sistema de E‑commerce** modelado mediante diagramas UML utilizando **Mermaid**, los cuales se renderizan automáticamente como imágenes en este README.
-classDiagram
-    Usuario <|-- Cliente
-    Usuario <|-- Administrador
+Este diagrama representa el ciclo de vida de un pedido dentro de un sistema de E‑commerce, desde que se crea hasta que es entregado al cliente.
 
-    Cliente "1" --> "1" Carrito
-    Cliente "1" --> "0..*" Pedido
-    Carrito "1" --> "1..*" ItemCarrito
-    ItemCarrito "*" --> "1" Producto
-    Pedido "1" --> "1..*" DetallePedido
-    DetallePedido "*" --> "1" Producto
-    Pedido "1" --> "1" Pago
-    Pedido "1" --> "1" Envio
+Estados incluidos:
+- **Pending**: El pedido ha sido creado y está pendiente de procesamiento.
+- **Shipped**: El pedido ha sido enviado al cliente.
+- **Delivered**: El pedido ha sido entregado exitosamente.
 
-    class Usuario {
-        id
-        nombre
-        email
-        password
-    }
-
-    class Cliente {
-        realizarCompra()
-        consultarPedido()
-    }
-
-    class Administrador {
-        gestionarProductos()
-        gestionarPedidos()
-    }
-
-    class Producto {
-        id
-        nombre
-        precio
-        stock
-    }
-
-    class Carrito {
-        id
-        calcularTotal()
-    }
-
-    class ItemCarrito {
-        cantidad
-        subtotal()
-    }
-
-    class Pedido {
-        id
-        fecha
-        estado
-    }
-
-    class DetallePedido {
-        cantidad
-        precioUnitario
-    }
-
-    class Pago {
-        metodo
-        estado
-        procesarPago()
-    }
-
-    class Envio {
-        direccion
-        estado
-    }
+El diagrama está implementado utilizando **Mermaid**, por lo que se renderiza automáticamente como imagen en GitHub.
 
 ---
 
-## 📌 Diagrama de Clases
+## 🔁 Diagrama de Estados – Pedido
 
+```mermaid
+stateDiagram-v2
+    [*] --> Pending
+
+    Pending --> Shipped : Pago confirmado
+    Shipped --> Delivered : Pedido entregado
+
+    Delivered --> [*]

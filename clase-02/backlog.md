@@ -196,4 +196,9 @@
 - Permite generar reporte para presupuesto de reemplazo
 
 ---
+## Análisis de Ambigüedades y Conflictos (Copilot)
 
+- ¿Qué significa “tiempo real” exactamente? (¿segundos, minutos?)
+- ¿Las multas se calculan por días calendario o hábiles?
+- ¿Qué pasa si un estudiante paga parcialmente una multa?
+- ¿Puede un docente exceder el límite de préstamos?

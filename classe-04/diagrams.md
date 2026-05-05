@@ -35,7 +35,7 @@ flowchart TD
     Carrito --> BD
 ```
 
-```@startuml
+@startuml
 class Userclass User
 class Product
 class Category

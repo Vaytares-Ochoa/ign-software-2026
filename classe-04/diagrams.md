@@ -33,3 +33,25 @@ flowchart TD
     Catalogo --> BD
     Pedidos --> BD
     Carrito --> BD
+```
+
+```@startuml
+class Userclass User
+class Product
+class Category
+class Cart
+class Order
+class Payment
+class Shipment
+
+User <|-- Customer
+User <|-- Admin
+Customer "1" -- "1" Cart
+Cart "1" -- "*" Product
+Customer "1" -- "*" Order
+Order "1" -- "1" Payment
+Order "1" -- "1" Shipment
+Product "*" -- "1" Category
+@enduml
+class Customer
+

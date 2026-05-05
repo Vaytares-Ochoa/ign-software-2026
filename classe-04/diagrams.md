@@ -1,36 +1,58 @@
-# Sistema de E-commerce
+# Diagramas — Sistema de E‑commerce
 
-## Descripción del Sistema
+## 📘 Diagrama de Clases (PlantUML)
 
-Un sistema de e‑commerce es una plataforma digital que permite la compra y venta de productos o servicios a través de Internet. El sistema está compuesto por varios módulos que trabajan de forma integrada para ofrecer una experiencia eficiente tanto al cliente como al administrador.
+```plantuml
+@startuml
+class User {
+  id
+  name
+  email
+}
 
-El cliente puede registrarse o iniciar sesión en la plataforma, navegar por el catálogo de productos, consultar precios y descripciones, y agregar productos al carrito de compras. Al finalizar la selección, el sistema gestiona el proceso de pago mediante una pasarela segura y, si el pago es exitoso, se genera un pedido.
+class Customer
+class Admin
 
-El administrador del sistema cuenta con un panel administrativo desde el cual puede gestionar productos, inventario, pedidos, usuarios y revisar reportes de ventas. Toda la información se almacena en una base de datos central que garantiza la integridad y disponibilidad de los datos.
+class Product {
+  id
+  name
+  price
+  stock
+}
 
-## Diagrama del Sistema de E‑commerce
+class Category {
+  id
+  name
+}
 
-```mermaid
-flowchart TD
-    Usuario[Cliente] -->|Navega y selecciona| Frontend[Interfaz Web / App]
-    Frontend -->|Solicitudes| Backend[Servidor / Lógica del Negocio]
+class Cart {
+  id
+}
 
-    Backend --> Catalogo[Módulo de Catálogo]
-    Backend --> Carrito[Módulo de Carrito]
-    Backend --> Pedidos[Módulo de Pedidos]
-    Backend --> Pagos[Módulo de Pagos]
+class Order {
+  id
+  status
+  total
+}
 
-    Pagos -->|Validación| Pasarela[Pasarela de Pago]
-    Pasarela -->|Confirmación| Pagos
+class Payment {
+  method
+  amount
+}
 
-    Backend --> Inventario[Módulo de Inventario]
-    Backend --> BD[(Base de Datos)]
+class Shipment {
+  carrier
+  trackingNumber
+}
 
-    Administrador[Administrador] -->|Gestiona| PanelAdmin[Panel Administrativo]
-    PanelAdmin --> Backend
+User <|-- Customer
+User <|-- Admin
 
-    Inventario --> BD
-    Catalogo --> BD
-    Pedidos --> BD
-    Carrito --> BD
-```
+Customer "1" -- "1" Cart
+Cart "1" -- "*" Product
+Product "*" -- "1" Category
+
+Customer "1" -- "*" Order
+Order "1" -- "1" Payment
+Order "1" -- "1" Shipment
+@enduml

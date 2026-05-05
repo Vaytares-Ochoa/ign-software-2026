@@ -1,58 +1,36 @@
-# Diagramas — Sistema de E‑commerce
+```md
+# 🛒 Sistema de E‑commerce
 
-## 📘 Diagrama de Clases (PlantUML)
+## 📄 Descripción del Proyecto
 
-```plantuml
-@startuml
-class User {
-  id
-  name
-  email
-}
+Este proyecto representa un sistema de comercio electrónico que permite a los clientes registrarse, buscar productos, agregarlos al carrito, realizar compras y hacer seguimiento de sus pedidos.  
+Los administradores pueden gestionar productos, inventario y pedidos.  
+El sistema integra pagos electrónicos y gestiona el ciclo completo de una orden.
 
-class Customer
-class Admin
+---
 
-class Product {
-  id
-  name
-  price
-  stock
-}
+## 🧩 Diagramas del Sistema
 
-class Category {
-  id
-  name
-}
+### 📘 Diagrama de Clases
+diagrams.md
 
-class Cart {
-  id
-}
+---
 
-class Order {
-  id
-  status
-  total
-}
+### 🔁 Diagrama de Secuencia — Realizar Compra
+diagrams.md
 
-class Payment {
-  method
-  amount
-}
+---
 
-class Shipment {
-  carrier
-  trackingNumber
-}
+### 👤 Diagrama de Casos de Uso
+diagrams.md
 
-User <|-- Customer
-User <|-- Admin
+---
 
-Customer "1" -- "1" Cart
-Cart "1" -- "*" Product
-Product "*" -- "1" Category
+## 🔄 Diagrama de Estados del Pedido
 
-Customer "1" -- "*" Order
-Order "1" -- "1" Payment
-Order "1" -- "1" Shipment
-@enduml
+```mermaid
+stateDiagram-v2
+[*] --> Pending
+Pending --> Shipped : Pago confirmado
+Shipped --> Delivered : Pedido entregado
+Delivered --> [*]

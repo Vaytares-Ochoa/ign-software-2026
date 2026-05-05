@@ -1,36 +1,35 @@
-```md
-# 🛒 Sistema de E‑commerce
+# Sistema de E-commerce
 
-## 📄 Descripción del Proyecto
+## Descripción del Sistema
 
-Este proyecto representa un sistema de comercio electrónico que permite a los clientes registrarse, buscar productos, agregarlos al carrito, realizar compras y hacer seguimiento de sus pedidos.  
-Los administradores pueden gestionar productos, inventario y pedidos.  
-El sistema integra pagos electrónicos y gestiona el ciclo completo de una orden.
+Un sistema de e‑commerce es una plataforma digital que permite la compra y venta de productos o servicios a través de Internet. El sistema está compuesto por varios módulos que trabajan de forma integrada para ofrecer una experiencia eficiente tanto al cliente como al administrador.
 
----
+El cliente puede registrarse o iniciar sesión en la plataforma, navegar por el catálogo de productos, consultar precios y descripciones, y agregar productos al carrito de compras. Al finalizar la selección, el sistema gestiona el proceso de pago mediante una pasarela segura y, si el pago es exitoso, se genera un pedido.
 
-## 🧩 Diagramas del Sistema
+El administrador del sistema cuenta con un panel administrativo desde el cual puede gestionar productos, inventario, pedidos, usuarios y revisar reportes de ventas. Toda la información se almacena en una base de datos central que garantiza la integridad y disponibilidad de los datos.
 
-### 📘 Diagrama de Clases
-diagrams.md
-
----
-
-### 🔁 Diagrama de Secuencia — Realizar Compra
-diagrams.md
-
----
-
-### 👤 Diagrama de Casos de Uso
-diagrams.md
-
----
-
-## 🔄 Diagrama de Estados del Pedido
+## Diagrama del Sistema de E‑commerce
 
 ```mermaid
-stateDiagram-v2
-[*] --> Pending
-Pending --> Shipped : Pago confirmado
-Shipped --> Delivered : Pedido entregado
-Delivered --> [*]
+flowchart TD
+    Usuario[Cliente] -->|Navega y selecciona| Frontend[Interfaz Web / App]
+    Frontend -->|Solicitudes| Backend[Servidor / Lógica del Negocio]
+
+    Backend --> Catalogo[Módulo de Catálogo]
+    Backend --> Carrito[Módulo de Carrito]
+    Backend --> Pedidos[Módulo de Pedidos]
+    Backend --> Pagos[Módulo de Pagos]
+
+    Pagos -->|Validación| Pasarela[Pasarela de Pago]
+    Pasarela -->|Confirmación| Pagos
+
+    Backend --> Inventario[Módulo de Inventario]
+    Backend --> BD[(Base de Datos)]
+
+    Administrador[Administrador] -->|Gestiona| PanelAdmin[Panel Administrativo]
+    PanelAdmin --> Backend
+
+    Inventario --> BD
+    Catalogo --> BD
+    Pedidos --> BD
+    Carrito --> BD

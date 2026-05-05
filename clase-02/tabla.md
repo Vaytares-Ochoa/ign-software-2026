@@ -1,10 +1,4 @@
-## Revisión por Pares con IA
-
-Copilot sugirió mejorar:
-- Claridad en tiempos de respuesta
-- Definir políticas de excepción
-- Establecer límites por rol
--------
+------
 
 | ID | HISTORIAS DE USUARIO | Como / Quiero / Para qué | Criterios de Aceptación | Prioridad |
 |----|--------------|--------------------------|------------------------------------|-----------|

@@ -1,3 +1,11 @@
+## Revisión por Pares con IA
+
+Copilot sugirió mejorar:
+- Claridad en tiempos de respuesta
+- Definir políticas de excepción
+- Establecer límites por rol
+-------
+
 | ID | HISTORIAS DE USUARIO | Como / Quiero / Para qué | Criterios de Aceptación | Prioridad |
 |----|--------------|--------------------------|------------------------------------|-----------|
 | 1 | Búsqueda de Disponibilidad de Libros | EST: Buscar libro por título, autor o ISBN / Verificar disponibilidad sin ir a físico | - Búsqueda por 4 campos (título, autor, ISBN, materia) <br> - Actualización cada 60s <br> - Mostrar "X de Y copias" <br> - Ubicación en estantería (sección, nivel) <br> - Tolerancia a typos con sugerencias | ALTA |
